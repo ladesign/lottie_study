@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Author">
+    <title>#[[$Title$]]#</title>
+    <script src="https://cdn.lottielab.com/s/lottie-player@1.x/player-web.min.js"></script>
+</head>
+
+<body>
+    <!-- Jitter -->
+    <!-- <lottie-player src="Vector.json" loop autoplay></lottie-player> -->
+
+    <!-- LottieLab -->
+     <div style="width:200px;height:125x; border: 1px solid #000000;">
+        <lottie-player src="robot.json" loop autoplay></lottie-player>
+     </div>
+    <!-- LottieLab -->
+    <div style="width:600px;height:300px; background-color: cadetblue;">
+        <lottie-player src="lottielab.json" loop autoplay  style="width:600px;height:300px;"></lottie-player>
+    </div>
+
+    <script>
+
+
+        // 已改成直接在JSON中移除，不需要用JavaScript 來處理，也沒有閃爍問題。
+
+        /*
+        只對第一個<lottie-player>有效
+        */
+        // // 1. 等待 Lottie 動畫加載完成
+        // document.querySelector('lottie-player').addEventListener('load', function() {
+        //     // 2. 延遲一小段時間確保 SVG 完全渲染（可調整）
+        //     setTimeout(() => {
+        //         // 3. 找到 Lottie 生成的 SVG 內的 <g> 元素
+        //         const svg = document.querySelector('lottie-player').shadowRoot.querySelector('svg');
+        //         const gElements = svg.querySelectorAll('g[opacity="1"][transform*="matrix"]');
+                
+        //         // 4. 遍歷所有匹配的 <g> 元素並修改 transform
+        //         gElements.forEach(g => {
+        //         const transform = g.getAttribute('transform');
+        //         const newTransform = transform.replace(/0\.34403571486473083/g, '0');
+        //         g.setAttribute('transform', newTransform);
+        //         });
+        //     }, 300); // 延遲 300ms 確保渲染完成
+        // });
+
+        /*
+        對所有<lottie-player>有效
+            將縮放比例從 0.34403571486473083 修改為 0
+            會閃爍，因為需要等到 lottie-player 加載完成後才能修改 SVG 的內容。
+        */
+        // // 1. 獲取所有 lottie-player 元素
+        // const lottiePlayers = document.querySelectorAll('lottie-player');
+
+        // // 2. 遍歷每個 lottie-player
+        // lottiePlayers.forEach(player => {
+        //     // 3. 監聽 load 事件
+        //     player.addEventListener('load', () => {
+        //         // 4. 延遲確保 SVG 渲染完成
+        //         setTimeout(() => {
+        //         // 5. 進入 Shadow DOM 查找 SVG
+        //         const svg = player.shadowRoot.querySelector('svg');
+        //         if (!svg) return; // 如果找不到 SVG，跳過
+
+        //         // 6. 找到所有目標 <g> 元素
+        //         const gElements = svg.querySelectorAll('g[opacity="1"][transform*="matrix"]');
+
+        //         // 7. 修改 transform 值
+        //         gElements.forEach(g => {
+        //             const transform = g.getAttribute('transform');
+        //             const newTransform = transform.replace(/0\.34403571486473083/g, '0');
+        //             g.setAttribute('transform', newTransform);
+        //         });
+        //         }, 100); // 延遲 100ms
+        //     });
+        // });
+
+
+        /*
+        對所有<lottie-player>有效
+            將 opacity 設置為 0，並隱藏元素。
+            會閃爍，因為需要等到 lottie-player 加載完成後才能修改 SVG 的內容。
+        */        
+        // // 1. 預先注入 CSS 隱藏所有可能的浮水印（避免閃爍）
+        // const hideWatermarkStyle = document.createElement('style');
+        // hideWatermarkStyle.textContent = `
+        // lottie-player::shadow g[opacity="1"][transform*="matrix(0.344"] {
+        //     opacity: 0 !important;
+        //     visibility: hidden !important;
+        // }
+        // `;
+        // document.head.appendChild(hideWatermarkStyle);
+
+        // // 2. 在所有 lottie-player 加載後，動態更新 opacity
+        // document.querySelectorAll('lottie-player').forEach(player => {
+        //     player.addEventListener('load', () => {
+        //         // 延遲確保 Shadow DOM 完全渲染
+        //         setTimeout(() => {
+        //         const svg = player.shadowRoot.querySelector('svg');
+        //         if (!svg) return;
+
+        //         // 批量修改所有符合條件的 <g> 元素
+        //         const watermarkElements = svg.querySelectorAll(
+        //             'g[opacity="1"][transform*="matrix(0.344"]'
+        //         );
+        //         watermarkElements.forEach(g => {
+        //             g.setAttribute('opacity', '0');
+        //             g.style.visibility = 'hidden'; // 雙重保險
+        //         });
+        //         }, 50); // 適當延遲（可調整）
+        //     });
+        // });
+
+
+
+
+
+
+
+    </script>
+    
+</body>
+
+</html>
